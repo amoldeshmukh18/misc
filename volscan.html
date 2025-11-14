@@ -26,18 +26,19 @@
                 th { background-color: #4CAF50; color: white; position: sticky; top: 0; }
                 tr:nth-child(even) { background-color: #f2f2f2; }
                 tr:hover { background-color: #e9f7e9; }
-                .volatility-high { color: #e74c3c; font-weight: bold; }
-                .volatility-medium { color: #f39c12; }
-                .volatility-low { color: #27ae60; }
-                .shorting-high { background-color: #ffebee; border-left: 4px solid #e74c3c; }
-                .shorting-medium { background-color: #fff3e0; border-left: 4px solid #ff9800; }
-                .longing-high { background-color: #e8f5e8; border-left: 4px solid #27ae60; }
-                .longing-medium { background-color: #f0f8e8; border-left: 4px solid #7cb342; }
+                .volatility-high { background-color: #ffebee; color: #e74c3c; font-weight: bold; }
+                .volatility-medium { background-color: #fff3e0; color: #f39c12; }
+                .volatility-low { background-color: #e8f5e8; color: #27ae60; }
+                .shorting-high { border-left: 4px solid #e74c3c; }
+                .shorting-medium { border-left: 4px solid #ff9800; }
+                .longing-high { border-left: 4px solid #27ae60; }
+                .longing-medium { border-left: 4px solid #7cb342; }
                 .bearish-signal { color: #e74c3c; font-weight: bold; }
                 .bullish-signal { color: #27ae60; font-weight: bold; }
                 .opportunity-badges { display: flex; justify-content: center; gap: 3px; }
                 .badge-short { background: #e74c3c; color: white; padding: 2px 4px; border-radius: 3px; font-size: 9px; }
                 .badge-long { background: #27ae60; color: white; padding: 2px 4px; border-radius: 3px; font-size: 9px; }
+                .score-cell { font-weight: bold; }
                 .explanation-section { 
                     margin-top: 40px; 
                     padding: 20px; 
@@ -89,7 +90,7 @@
         <body>
             <div class="container">
                 <h1>📊 Bybit USDT Perpetual Volatility Scanner</h1>
-                <div class="last-updated">Last updated: 2025-11-14 15:04:37 UTC</div>
+                <div class="last-updated">Last updated: 16:23 UTC+1</div>
                 <div class="refresh-info">
                     🔄 <strong>Auto-refresh enabled</strong> - This page will automatically update every 15 minutes
                 </div>
@@ -98,784 +99,835 @@
                 <div class="opportunity-summary">
                     <div class="summary-card summary-short">
                         <h3>🔻 Shorting Opportunities</h3>
-                        <h2>15</h2>
+                        <h2>42</h2>
                         <p>Tokens with high shorting potential</p>
                     </div>
                     <div class="summary-card summary-long">
                         <h3>🔺 Longing Opportunities</h3>
-                        <h2>3</h2>
+                        <h2>14</h2>
                         <p>Tokens with high longing potential</p>
                     </div>
                 </div>
                 
-                <h2>🎯 Top Trading Opportunities (Sorted by Volatility Score)</h2>
+                <h2>🎯 Top Trading Opportunities (Sorted by Combined Volatility Score)</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Rank</th>
                             <th>Symbol</th>
-                            <th>Volatility</th>
+                            <th>Combined Vol</th>
                             <th>Short</th>
                             <th>Long</th>
                             <th>Opportunity</th>
-                            <th>5m RVI/BBWP/ATR%</th>
-                            <th>15m RVI/BBWP/ATR%</th>
-                            <th>1h RVI/BBWP/ATR%</th>
-                            <th>4h RVI/BBWP/ATR%</th>
+                            <th>5m Vol</th>
+                            <th>15m Vol</th>
+                            <th>1h Vol</th>
+                            <th>4h Vol</th>
+                            <th>1d Vol</th>
                             <th>Trend</th>
                             <th>Price Position</th>
                         </tr>
                     </thead>
                     <tbody>
         
-                        <tr class="shorting-high">
+                        <tr class="shorting-medium">
                             <td>1</td>
-                            <td><strong>HIPPOUSDT</strong></td>
-                            <td class="volatility-high">0.789</td>
-                            <td>0.849</td>
-                            <td>0.556</td>
+                            <td><strong>ALCHUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.842</td>
+                            <td>0.505</td>
+                            <td>0.825</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td>69.64/75.0/2.57</td>
-                            <td>31.75/37.5/8.52</td>
-                            <td>84.62/97.5/24.87</td>
-                            <td>83.01/72.5/45.13</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-78.33% L:14.37%)</td>
+                            <td class="volatility-high">0.868</td>
+                            <td class="volatility-high">0.935</td>
+                            <td class="volatility-high">0.970</td>
+                            <td class="volatility-medium">0.452</td>
+                            <td class="volatility-high">0.957</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
                         </tr>
             
                         <tr class="shorting-high">
                             <td>2</td>
-                            <td><strong>BANKUSDT</strong></td>
-                            <td class="volatility-high">0.695</td>
-                            <td>0.801</td>
-                            <td>0.441</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>79.52/75.0/1.6</td>
-                            <td>60.63/97.5/2.84</td>
-                            <td>33.39/37.5/8.33</td>
-                            <td>92.07/97.5/19.31</td>
+                            <td><strong>HIPPOUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.763</td>
+                            <td>0.858</td>
+                            <td>0.591</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-high">0.676</td>
+                            <td class="volatility-medium">0.546</td>
+                            <td class="volatility-high">0.940</td>
+                            <td class="volatility-high">0.852</td>
+                            <td class="volatility-high">0.883</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-69.21% L:2.29%)</td>
+                            <td>LOW</td>
                         </tr>
             
                         <tr class="longing-high">
                             <td>3</td>
                             <td><strong>STRKUSDT</strong></td>
-                            <td class="volatility-high">0.639</td>
-                            <td>0.408</td>
-                            <td>0.704</td>
+                            <td class="score-cell volatility-high">0.744</td>
+                            <td>0.448</td>
+                            <td>0.766</td>
                             <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td>82.03/95.0/2.18</td>
-                            <td>95.93/97.5/2.74</td>
-                            <td>62.33/97.5/4.17</td>
-                            <td>32.98/2.5/8.33</td>
+                            <td class="volatility-high">0.708</td>
+                            <td class="volatility-high">0.829</td>
+                            <td class="volatility-high">0.813</td>
+                            <td class="volatility-medium">0.452</td>
+                            <td class="volatility-high">0.935</td>
                             <td class="bullish-signal">BULLISH</td>
-                            <td>middle<br>(H:-2.31% L:29.04%)</td>
+                            <td>MIDDLE</td>
                         </tr>
             
                         <tr class="longing-high">
                             <td>4</td>
                             <td><strong>TACUSDT</strong></td>
-                            <td class="volatility-high">0.629</td>
-                            <td>0.418</td>
-                            <td>0.680</td>
+                            <td class="score-cell volatility-high">0.734</td>
+                            <td>0.500</td>
+                            <td>0.761</td>
                             <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td>70.96/75.0/2.13</td>
-                            <td>61.23/45.0/3.51</td>
-                            <td>74.06/97.5/4.66</td>
-                            <td>66.01/97.5/6.14</td>
+                            <td class="volatility-high">0.752</td>
+                            <td class="volatility-medium">0.591</td>
+                            <td class="volatility-high">0.885</td>
+                            <td class="volatility-high">0.878</td>
+                            <td class="volatility-medium">0.541</td>
                             <td class="bullish-signal">BULLISH</td>
-                            <td>middle<br>(H:-3.49% L:41.14%)</td>
+                            <td>MIDDLE</td>
                         </tr>
             
                         <tr class="shorting-high">
                             <td>5</td>
-                            <td><strong>JELLYJELLYUSDT</strong></td>
-                            <td class="volatility-high">0.611</td>
-                            <td>0.628</td>
-                            <td>0.452</td>
+                            <td><strong>YALAUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.720</td>
+                            <td>0.832</td>
+                            <td>0.461</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>59.05/97.5/1.74</td>
-                            <td>69.94/97.5/2.44</td>
-                            <td>38.08/60.0/4.85</td>
-                            <td>66.3/30.0/12.29</td>
+                            <td class="volatility-high">0.654</td>
+                            <td class="volatility-medium">0.480</td>
+                            <td class="volatility-high">0.836</td>
+                            <td class="volatility-high">0.892</td>
+                            <td class="volatility-high">0.824</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-25.33% L:13.41%)</td>
+                            <td>LOW</td>
                         </tr>
             
                         <tr class="shorting-high">
                             <td>6</td>
-                            <td><strong>LSKUSDT</strong></td>
-                            <td class="volatility-medium">0.582</td>
-                            <td>0.646</td>
-                            <td>0.429</td>
+                            <td><strong>SAROSUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.704</td>
+                            <td>0.822</td>
+                            <td>0.491</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>64.63/97.5/1.91</td>
-                            <td>50.57/15.0/3.19</td>
-                            <td>52.35/67.5/6.24</td>
-                            <td>19.78/47.5/12.24</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-33.5% L:21.15%)</td>
+                            <td class="volatility-medium">0.528</td>
+                            <td class="volatility-high">0.850</td>
+                            <td class="volatility-high">0.628</td>
+                            <td class="volatility-high">0.964</td>
+                            <td class="volatility-medium">0.570</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="shorting-medium">
+                        <tr class="shorting-high">
                             <td>7</td>
-                            <td><strong>LINEAUSDT</strong></td>
-                            <td class="volatility-medium">0.574</td>
-                            <td>0.541</td>
-                            <td>0.424</td>
+                            <td><strong>B3USDT</strong></td>
+                            <td class="score-cell volatility-high">0.701</td>
+                            <td>0.821</td>
+                            <td>0.463</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>81.4/95.0/0.94</td>
-                            <td>85.4/67.5/1.38</td>
-                            <td>28.06/45.0/2.96</td>
-                            <td>94.2/97.5/6.41</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-26.34% L:5.05%)</td>
+                            <td class="volatility-medium">0.581</td>
+                            <td class="volatility-high">0.713</td>
+                            <td class="volatility-high">0.676</td>
+                            <td class="volatility-high">0.894</td>
+                            <td class="volatility-high">0.687</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="shorting-medium">
+                        <tr class="shorting-high">
                             <td>8</td>
-                            <td><strong>DOGUSDT</strong></td>
-                            <td class="volatility-medium">0.562</td>
-                            <td>0.556</td>
-                            <td>0.424</td>
+                            <td><strong>JELLYJELLYUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.698</td>
+                            <td>0.748</td>
+                            <td>0.499</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>77.23/97.5/1.17</td>
-                            <td>71.21/87.5/1.87</td>
-                            <td>37.14/25.0/3.17</td>
-                            <td>84.71/97.5/6.22</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-22.22% L:6.38%)</td>
+                            <td class="volatility-high">0.625</td>
+                            <td class="volatility-high">0.719</td>
+                            <td class="volatility-high">0.647</td>
+                            <td class="volatility-high">0.654</td>
+                            <td class="volatility-high">0.911</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="shorting-medium">
+                        <tr class="shorting-high">
                             <td>9</td>
-                            <td><strong>AKEUSDT</strong></td>
-                            <td class="volatility-medium">0.551</td>
-                            <td>0.570</td>
-                            <td>0.459</td>
+                            <td><strong>TRBUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.693</td>
+                            <td>0.816</td>
+                            <td>0.455</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>77.79/97.5/1.17</td>
-                            <td>36.97/17.5/2.13</td>
-                            <td>58.61/95.0/4.21</td>
-                            <td>46.52/65.0/8.95</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-36.19% L:7.3%)</td>
+                            <td class="volatility-low">0.251</td>
+                            <td class="volatility-high">0.942</td>
+                            <td class="volatility-high">0.871</td>
+                            <td class="volatility-high">0.763</td>
+                            <td class="volatility-high">0.746</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="shorting-medium">
+                        <tr class="shorting-high">
                             <td>10</td>
-                            <td><strong>PLUMEUSDT</strong></td>
-                            <td class="volatility-medium">0.542</td>
-                            <td>0.567</td>
-                            <td>0.438</td>
+                            <td><strong>XANUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.692</td>
+                            <td>0.815</td>
+                            <td>0.420</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>55.48/97.5/1.6</td>
-                            <td>54.21/55.0/2.13</td>
-                            <td>19.91/45.0/4.11</td>
-                            <td>60.31/97.5/7.46</td>
+                            <td class="volatility-high">0.738</td>
+                            <td class="volatility-high">0.693</td>
+                            <td class="volatility-high">0.680</td>
+                            <td class="volatility-high">0.747</td>
+                            <td class="volatility-medium">0.565</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-30.44% L:6.86%)</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="">
+                        <tr class="shorting-high">
                             <td>11</td>
-                            <td><strong>USUALUSDT</strong></td>
-                            <td class="volatility-medium">0.512</td>
-                            <td>0.379</td>
-                            <td>0.472</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>74.39/97.5/0.95</td>
-                            <td>48.9/62.5/1.45</td>
-                            <td>10.29/32.5/3.48</td>
-                            <td>47.75/80.0/6.52</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-20.83% L:7.83%)</td>
-                        </tr>
-            
-                        <tr class="shorting-medium">
-                            <td>12</td>
-                            <td><strong>ZORAUSDT</strong></td>
-                            <td class="volatility-medium">0.495</td>
-                            <td>0.520</td>
-                            <td>0.321</td>
+                            <td><strong>EVAAUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.679</td>
+                            <td>0.808</td>
+                            <td>0.452</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>39.98/42.5/0.81</td>
-                            <td>70.37/90.0/1.22</td>
-                            <td>27.41/5.0/2.78</td>
-                            <td>88.44/97.5/6.0</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-23.3% L:2.04%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>13</td>
-                            <td><strong>RESOLVUSDT</strong></td>
-                            <td class="volatility-medium">0.491</td>
-                            <td>0.469</td>
-                            <td>0.426</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>48.75/92.5/1.26</td>
-                            <td>25.22/2.5/2.32</td>
-                            <td>60.45/30.0/5.66</td>
-                            <td>51.67/0.0/10.42</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>low<br>(H:-14.31% L:25.07%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>14</td>
-                            <td><strong>ZKUSDT</strong></td>
-                            <td class="volatility-medium">0.491</td>
-                            <td>0.394</td>
-                            <td>0.487</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>76.21/85.0/1.34</td>
-                            <td>97.48/97.5/1.7</td>
-                            <td>39.79/50.0/2.49</td>
-                            <td>33.47/5.0/5.82</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-11.21% L:9.67%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>15</td>
-                            <td><strong>ZEREBROUSDT</strong></td>
-                            <td class="volatility-medium">0.484</td>
-                            <td>0.488</td>
-                            <td>0.378</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>51.25/97.5/0.8</td>
-                            <td>45.81/90.0/1.28</td>
-                            <td>51.47/5.0/3.24</td>
-                            <td>19.95/40.0/7.04</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-20.66% L:10.36%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>16</td>
-                            <td><strong>ZBCNUSDT</strong></td>
-                            <td class="volatility-medium">0.483</td>
-                            <td>0.472</td>
-                            <td>0.347</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>78.47/97.5/0.8</td>
-                            <td>62.24/95.0/1.23</td>
-                            <td>20.49/37.5/2.12</td>
-                            <td>59.96/60.0/4.46</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-16.85% L:4.27%)</td>
-                        </tr>
-            
-                        <tr class="shorting-medium">
-                            <td>17</td>
-                            <td><strong>POPCATUSDT</strong></td>
-                            <td class="volatility-medium">0.479</td>
-                            <td>0.553</td>
-                            <td>0.313</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>38.05/22.5/0.9</td>
-                            <td>17.86/0.0/1.35</td>
-                            <td>50.23/70.0/3.18</td>
-                            <td>91.22/97.5/8.77</td>
+                            <td class="volatility-medium">0.595</td>
+                            <td class="volatility-medium">0.492</td>
+                            <td class="volatility-high">0.992</td>
+                            <td class="volatility-high">0.772</td>
+                            <td class="volatility-medium">0.568</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-48.33% L:2.52%)</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>12</td>
+                            <td><strong>BANKUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.679</td>
+                            <td>0.807</td>
+                            <td>0.439</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-high">0.669</td>
+                            <td class="volatility-high">0.712</td>
+                            <td class="volatility-medium">0.569</td>
+                            <td class="volatility-high">0.965</td>
+                            <td class="volatility-medium">0.450</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>13</td>
+                            <td><strong>B2USDT</strong></td>
+                            <td class="score-cell volatility-high">0.678</td>
+                            <td>0.807</td>
+                            <td>0.407</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.343</td>
+                            <td class="volatility-high">0.696</td>
+                            <td class="volatility-high">0.800</td>
+                            <td class="volatility-high">0.987</td>
+                            <td class="volatility-high">0.673</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>14</td>
+                            <td><strong>NAORISUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.665</td>
+                            <td>0.745</td>
+                            <td>0.449</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.588</td>
+                            <td class="volatility-medium">0.518</td>
+                            <td class="volatility-medium">0.538</td>
+                            <td class="volatility-high">0.932</td>
+                            <td class="volatility-high">0.859</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="longing-high">
+                            <td>15</td>
+                            <td><strong>NOMUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.658</td>
+                            <td>0.428</td>
+                            <td>0.633</td>
+                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-medium">0.594</td>
+                            <td class="volatility-high">0.804</td>
+                            <td class="volatility-medium">0.543</td>
+                            <td class="volatility-high">0.701</td>
+                            <td class="volatility-high">0.655</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>16</td>
+                            <td><strong>PLUMEUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.657</td>
+                            <td>0.794</td>
+                            <td>0.451</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-high">0.675</td>
+                            <td class="volatility-medium">0.508</td>
+                            <td class="volatility-medium">0.491</td>
+                            <td class="volatility-high">0.859</td>
+                            <td class="volatility-high">0.826</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>17</td>
+                            <td><strong>LSKUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.656</td>
+                            <td>0.746</td>
+                            <td>0.473</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-high">0.707</td>
+                            <td class="volatility-medium">0.432</td>
+                            <td class="volatility-high">0.733</td>
+                            <td class="volatility-medium">0.558</td>
+                            <td class="volatility-high">0.913</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
                         </tr>
             
                         <tr class="shorting-medium">
                             <td>18</td>
-                            <td><strong>PUMPFUNUSDT</strong></td>
-                            <td class="volatility-medium">0.479</td>
-                            <td>0.598</td>
-                            <td>0.311</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>37.43/57.5/1.04</td>
-                            <td>51.14/90.0/1.7</td>
-                            <td>30.96/17.5/2.87</td>
-                            <td>70.37/87.5/6.26</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-23.06% L:2.91%)</td>
+                            <td><strong>PEAQUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.650</td>
+                            <td>0.546</td>
+                            <td>0.540</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-high">0.614</td>
+                            <td class="volatility-high">0.647</td>
+                            <td class="volatility-medium">0.573</td>
+                            <td class="volatility-high">0.750</td>
+                            <td class="volatility-high">0.697</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
                         </tr>
             
-                        <tr class="">
+                        <tr class="shorting-high">
                             <td>19</td>
-                            <td><strong>XPINUSDT</strong></td>
-                            <td class="volatility-medium">0.468</td>
-                            <td>0.491</td>
-                            <td>0.333</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>51.88/2.5/0.73</td>
-                            <td>45.97/45.0/1.37</td>
-                            <td>53.8/87.5/2.81</td>
-                            <td>45.16/97.5/6.6</td>
+                            <td><strong>AEROUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.650</td>
+                            <td>0.790</td>
+                            <td>0.427</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.530</td>
+                            <td class="volatility-medium">0.575</td>
+                            <td class="volatility-high">0.639</td>
+                            <td class="volatility-high">0.930</td>
+                            <td class="volatility-high">0.640</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-23.5% L:4.66%)</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="shorting-medium">
+                        <tr class="longing-high">
                             <td>20</td>
-                            <td><strong>HBARUSDT</strong></td>
-                            <td class="volatility-medium">0.460</td>
-                            <td>0.506</td>
-                            <td>0.308</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>62.69/95.0/0.77</td>
-                            <td>78.16/80.0/1.1</td>
-                            <td>29.03/25.0/1.85</td>
-                            <td>63.48/97.5/3.54</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-15.98% L:2.74%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>21</td>
-                            <td><strong>TRUTHUSDT</strong></td>
-                            <td class="volatility-medium">0.458</td>
-                            <td>0.438</td>
-                            <td>0.411</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>57.68/40.0/1.4</td>
-                            <td>65.65/5.0/2.53</td>
-                            <td>33.15/0.0/5.42</td>
-                            <td>38.4/10.0/12.35</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>low<br>(H:-5.96% L:34.09%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>22</td>
-                            <td><strong>BEAMUSDT</strong></td>
-                            <td class="volatility-medium">0.455</td>
-                            <td>0.443</td>
-                            <td>0.324</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>54.02/97.5/0.9</td>
-                            <td>62.07/72.5/1.36</td>
-                            <td>16.5/25.0/2.29</td>
-                            <td>71.98/75.0/4.32</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-14.7% L:3.75%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>23</td>
-                            <td><strong>10000ELONUSDT</strong></td>
-                            <td class="volatility-medium">0.450</td>
-                            <td>0.481</td>
-                            <td>0.311</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>49.96/92.5/1.05</td>
-                            <td>72.63/12.5/1.4</td>
-                            <td>36.92/62.5/2.23</td>
-                            <td>66.46/97.5/4.19</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-19.14% L:3.46%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>24</td>
-                            <td><strong>MEWUSDT</strong></td>
-                            <td class="volatility-medium">0.449</td>
-                            <td>0.470</td>
-                            <td>0.312</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>61.4/95.0/0.87</td>
-                            <td>61.42/35.0/1.2</td>
-                            <td>39.71/27.5/2.05</td>
-                            <td>75.55/97.5/3.98</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-16.2% L:3.54%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>25</td>
-                            <td><strong>BLASTUSDT</strong></td>
-                            <td class="volatility-medium">0.447</td>
-                            <td>0.397</td>
-                            <td>0.315</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>68.57/97.5/0.65</td>
-                            <td>66.47/72.5/1.08</td>
-                            <td>24.21/0.0/2.02</td>
-                            <td>72.86/97.5/3.77</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-14.46% L:3.15%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>26</td>
-                            <td><strong>GALAUSDT</strong></td>
-                            <td class="volatility-medium">0.444</td>
-                            <td>0.384</td>
-                            <td>0.340</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>66.76/95.0/0.9</td>
-                            <td>42.38/80.0/1.32</td>
-                            <td>23.98/7.5/2.24</td>
-                            <td>80.6/65.0/4.49</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-13.66% L:4.55%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>27</td>
-                            <td><strong>SPELLUSDT</strong></td>
-                            <td class="volatility-medium">0.441</td>
-                            <td>0.380</td>
-                            <td>0.325</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>65.86/95.0/0.57</td>
-                            <td>59.21/75.0/0.91</td>
-                            <td>27.83/0.0/1.67</td>
-                            <td>60.6/97.5/4.31</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-19.1% L:3.67%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>28</td>
-                            <td><strong>PENGUUSDT</strong></td>
-                            <td class="volatility-medium">0.440</td>
-                            <td>0.492</td>
-                            <td>0.295</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>37.73/97.5/0.91</td>
-                            <td>71.92/37.5/1.33</td>
-                            <td>21.1/20.0/2.27</td>
-                            <td>68.1/92.5/4.7</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-17.05% L:2.99%)</td>
-                        </tr>
-            
-                        <tr class="shorting-medium">
-                            <td>29</td>
-                            <td><strong>DOODUSDT</strong></td>
-                            <td class="volatility-medium">0.433</td>
-                            <td>0.516</td>
-                            <td>0.288</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>53.28/92.5/0.75</td>
-                            <td>50.2/15.0/1.2</td>
-                            <td>17.93/20.0/2.46</td>
-                            <td>73.71/97.5/5.21</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-24.21% L:2.45%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>30</td>
-                            <td><strong>1000000BABYDOGEUSDT</strong></td>
-                            <td class="volatility-medium">0.429</td>
-                            <td>0.404</td>
-                            <td>0.325</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>60.59/97.5/0.73</td>
-                            <td>67.65/77.5/1.15</td>
-                            <td>30.43/22.5/1.87</td>
-                            <td>54.16/65.0/3.58</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-10.76% L:4.19%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>31</td>
-                            <td><strong>RSRUSDT</strong></td>
-                            <td class="volatility-medium">0.412</td>
-                            <td>0.438</td>
-                            <td>0.284</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>51.04/95.0/0.83</td>
-                            <td>51.11/12.5/1.31</td>
-                            <td>25.1/2.5/2.33</td>
-                            <td>69.31/95.0/4.6</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-14.94% L:3.96%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>32</td>
-                            <td><strong>WIFUSDT</strong></td>
-                            <td class="volatility-medium">0.410</td>
-                            <td>0.433</td>
-                            <td>0.276</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>58.75/95.0/0.99</td>
-                            <td>51.21/0.0/1.41</td>
-                            <td>35.38/20.0/2.43</td>
-                            <td>62.88/67.5/4.7</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-13.73% L:2.89%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>33</td>
-                            <td><strong>XRPUSDT</strong></td>
-                            <td class="volatility-medium">0.410</td>
-                            <td>0.354</td>
-                            <td>0.307</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>75.71/97.5/0.71</td>
-                            <td>51.11/97.5/1.05</td>
-                            <td>23.49/0.0/1.78</td>
-                            <td>68.45/57.5/3.08</td>
-                            <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-8.97% L:3.34%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>34</td>
-                            <td><strong>10000SATSUSDT</strong></td>
-                            <td class="volatility-medium">0.409</td>
+                            <td><strong>LYNUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.645</td>
                             <td>0.392</td>
-                            <td>0.302</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>57.97/97.5/0.78</td>
-                            <td>54.72/55.0/1.24</td>
-                            <td>28.53/0.0/2.21</td>
-                            <td>54.91/50.0/4.58</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-12.53% L:5.07%)</td>
+                            <td>0.707</td>
+                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-high">0.601</td>
+                            <td class="volatility-high">0.649</td>
+                            <td class="volatility-high">0.693</td>
+                            <td class="volatility-high">0.735</td>
+                            <td class="volatility-medium">0.539</td>
+                            <td class="bullish-signal">BULLISH</td>
+                            <td>MIDDLE</td>
                         </tr>
             
-                        <tr class="">
-                            <td>35</td>
-                            <td><strong>JASMYUSDT</strong></td>
-                            <td class="volatility-medium">0.408</td>
-                            <td>0.424</td>
-                            <td>0.287</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>53.36/97.5/0.8</td>
-                            <td>51.4/57.5/1.19</td>
-                            <td>44.71/20.0/2.07</td>
-                            <td>53.68/50.0/3.88</td>
+                        <tr class="shorting-high">
+                            <td>21</td>
+                            <td><strong>SPXUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.643</td>
+                            <td>0.786</td>
+                            <td>0.411</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.561</td>
+                            <td class="volatility-low">0.288</td>
+                            <td class="volatility-high">0.737</td>
+                            <td class="volatility-high">0.892</td>
+                            <td class="volatility-high">0.878</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-10.1% L:3.43%)</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="">
-                            <td>36</td>
-                            <td><strong>BOMEUSDT</strong></td>
-                            <td class="volatility-medium">0.407</td>
-                            <td>0.369</td>
-                            <td>0.283</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>57.45/95.0/0.87</td>
-                            <td>53.88/25.0/1.29</td>
-                            <td>25.76/10.0/2.27</td>
-                            <td>62.49/65.0/4.43</td>
+                        <tr class="shorting-high">
+                            <td>22</td>
+                            <td><strong>DOGUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.639</td>
+                            <td>0.617</td>
+                            <td>0.437</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.586</td>
+                            <td class="volatility-high">0.662</td>
+                            <td class="volatility-medium">0.419</td>
+                            <td class="volatility-high">0.941</td>
+                            <td class="volatility-high">0.626</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>23</td>
+                            <td><strong>AKEUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.635</td>
+                            <td>0.781</td>
+                            <td>0.425</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-high">0.617</td>
+                            <td class="volatility-medium">0.316</td>
+                            <td class="volatility-high">0.800</td>
+                            <td class="volatility-high">0.714</td>
+                            <td class="volatility-high">0.819</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-14.35% L:3.36%)</td>
+                            <td>LOW</td>
                         </tr>
             
                         <tr class="shorting-medium">
-                            <td>37</td>
-                            <td><strong>1000PEPEUSDT</strong></td>
-                            <td class="volatility-medium">0.407</td>
-                            <td>0.542</td>
-                            <td>0.245</td>
+                            <td>24</td>
+                            <td><strong>BRETTUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.635</td>
+                            <td>0.550</td>
+                            <td>0.420</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>43.58/57.5/0.85</td>
-                            <td>40.53/57.5/1.26</td>
-                            <td>30.64/27.5/2.13</td>
-                            <td>73.81/97.5/3.86</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-15.38% L:1.57%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>38</td>
-                            <td><strong>DOGEUSDT</strong></td>
-                            <td class="volatility-medium">0.406</td>
-                            <td>0.387</td>
-                            <td>0.282</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>51.75/97.5/0.76</td>
-                            <td>65.96/87.5/1.11</td>
-                            <td>21.23/2.5/1.82</td>
-                            <td>70.77/60.0/3.23</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-9.3% L:2.92%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>39</td>
-                            <td><strong>1000BONKUSDT</strong></td>
-                            <td class="volatility-medium">0.401</td>
-                            <td>0.463</td>
-                            <td>0.255</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>36.54/95.0/0.83</td>
-                            <td>52.14/17.5/1.2</td>
-                            <td>20.83/25.0/2.07</td>
-                            <td>68.87/95.0/3.94</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-14.47% L:2.72%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>40</td>
-                            <td><strong>PEOPLEUSDT</strong></td>
-                            <td class="volatility-medium">0.399</td>
-                            <td>0.319</td>
-                            <td>0.345</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>54.55/95.0/0.84</td>
-                            <td>63.68/47.5/1.26</td>
-                            <td>16.45/7.5/2.15</td>
-                            <td>60.15/35.0/4.4</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-9.9% L:5.89%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>41</td>
-                            <td><strong>DENTUSDT</strong></td>
-                            <td class="volatility-medium">0.398</td>
-                            <td>0.354</td>
-                            <td>0.299</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>47.84/95.0/0.64</td>
-                            <td>56.33/75.0/1.03</td>
-                            <td>16.84/5.0/1.88</td>
-                            <td>58.29/55.0/3.82</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-10.18% L:4.07%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>42</td>
-                            <td><strong>HMSTRUSDT</strong></td>
-                            <td class="volatility-medium">0.398</td>
-                            <td>0.349</td>
-                            <td>0.304</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>33.14/60.0/0.8</td>
-                            <td>80.0/30.0/1.22</td>
-                            <td>19.58/12.5/2.13</td>
-                            <td>52.82/82.5/4.61</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-12.75% L:6.41%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>43</td>
-                            <td><strong>FUSDT</strong></td>
-                            <td class="volatility-medium">0.394</td>
-                            <td>0.334</td>
-                            <td>0.360</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>42.78/15.0/0.98</td>
-                            <td>37.88/20.0/1.86</td>
-                            <td>36.21/92.5/3.21</td>
-                            <td>61.58/0.0/5.57</td>
+                            <td class="volatility-medium">0.572</td>
+                            <td class="volatility-medium">0.585</td>
+                            <td class="volatility-medium">0.427</td>
+                            <td class="volatility-high">0.914</td>
+                            <td class="volatility-high">0.753</td>
                             <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-7.78% L:9.28%)</td>
+                            <td>LOW</td>
                         </tr>
             
-                        <tr class="">
-                            <td>44</td>
-                            <td><strong>FARTCOINUSDT</strong></td>
-                            <td class="volatility-medium">0.387</td>
-                            <td>0.470</td>
-                            <td>0.266</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>39.52/65.0/1.24</td>
-                            <td>57.37/0.0/1.8</td>
-                            <td>16.94/27.5/3.1</td>
-                            <td>41.95/42.5/6.55</td>
+                        <tr class="shorting-high">
+                            <td>25</td>
+                            <td><strong>ASPUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.629</td>
+                            <td>0.683</td>
+                            <td>0.407</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.488</td>
+                            <td class="volatility-medium">0.497</td>
+                            <td class="volatility-medium">0.532</td>
+                            <td class="volatility-high">0.943</td>
+                            <td class="volatility-high">0.814</td>
                             <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-20.24% L:4.05%)</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>26</td>
+                            <td><strong>AINUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.625</td>
+                            <td>0.775</td>
+                            <td>0.417</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.446</td>
+                            <td class="volatility-medium">0.320</td>
+                            <td class="volatility-high">0.746</td>
+                            <td class="volatility-high">0.852</td>
+                            <td class="volatility-high">0.940</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-medium">
+                            <td>27</td>
+                            <td><strong>COOKIEUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.624</td>
+                            <td>0.571</td>
+                            <td>0.553</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-medium">0.571</td>
+                            <td class="volatility-high">0.626</td>
+                            <td class="volatility-medium">0.454</td>
+                            <td class="volatility-high">0.836</td>
+                            <td class="volatility-high">0.682</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>28</td>
+                            <td><strong>GLMUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.622</td>
+                            <td>0.664</td>
+                            <td>0.418</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-high">0.611</td>
+                            <td class="volatility-medium">0.528</td>
+                            <td class="volatility-high">0.633</td>
+                            <td class="volatility-medium">0.480</td>
+                            <td class="volatility-high">0.932</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>29</td>
+                            <td><strong>1000000MOGUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.621</td>
+                            <td>0.668</td>
+                            <td>0.451</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.414</td>
+                            <td class="volatility-medium">0.430</td>
+                            <td class="volatility-high">0.863</td>
+                            <td class="volatility-high">0.828</td>
+                            <td class="volatility-high">0.672</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-medium">
+                            <td>30</td>
+                            <td><strong>ZEUSUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.620</td>
+                            <td>0.513</td>
+                            <td>0.514</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-medium">0.595</td>
+                            <td class="volatility-high">0.614</td>
+                            <td class="volatility-medium">0.366</td>
+                            <td class="volatility-high">0.789</td>
+                            <td class="volatility-high">0.806</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>31</td>
+                            <td><strong>AIAUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.618</td>
+                            <td>0.771</td>
+                            <td>0.409</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.524</td>
+                            <td class="volatility-medium">0.598</td>
+                            <td class="volatility-high">0.867</td>
+                            <td class="volatility-medium">0.367</td>
+                            <td class="volatility-high">0.771</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="longing-medium">
+                            <td>32</td>
+                            <td><strong>LAUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.616</td>
+                            <td>0.490</td>
+                            <td>0.570</td>
+                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-high">0.670</td>
+                            <td class="volatility-high">0.703</td>
+                            <td class="volatility-medium">0.349</td>
+                            <td class="volatility-high">0.792</td>
+                            <td class="volatility-medium">0.544</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>33</td>
+                            <td><strong>GIGAUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.615</td>
+                            <td>0.723</td>
+                            <td>0.386</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.476</td>
+                            <td class="volatility-medium">0.554</td>
+                            <td class="volatility-medium">0.489</td>
+                            <td class="volatility-high">0.909</td>
+                            <td class="volatility-high">0.748</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>34</td>
+                            <td><strong>XCNUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.611</td>
+                            <td>0.650</td>
+                            <td>0.398</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.465</td>
+                            <td class="volatility-medium">0.565</td>
+                            <td class="volatility-medium">0.447</td>
+                            <td class="volatility-high">0.859</td>
+                            <td class="volatility-high">0.845</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="longing-medium">
+                            <td>35</td>
+                            <td><strong>ZKUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.611</td>
+                            <td>0.367</td>
+                            <td>0.583</td>
+                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-high">0.621</td>
+                            <td class="volatility-high">0.764</td>
+                            <td class="volatility-medium">0.466</td>
+                            <td class="volatility-medium">0.462</td>
+                            <td class="volatility-high">0.742</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="longing-high">
+                            <td>36</td>
+                            <td><strong>ARCUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.610</td>
+                            <td>0.366</td>
+                            <td>0.661</td>
+                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-medium">0.387</td>
+                            <td class="volatility-high">0.727</td>
+                            <td class="volatility-medium">0.532</td>
+                            <td class="volatility-high">0.676</td>
+                            <td class="volatility-high">0.832</td>
+                            <td class="bullish-signal">BULLISH</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>37</td>
+                            <td><strong>BLESSUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.608</td>
+                            <td>0.765</td>
+                            <td>0.402</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-low">0.284</td>
+                            <td class="volatility-medium">0.568</td>
+                            <td class="volatility-high">0.818</td>
+                            <td class="volatility-high">0.874</td>
+                            <td class="volatility-high">0.608</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="longing-high">
+                            <td>38</td>
+                            <td><strong>1000RATSUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.606</td>
+                            <td>0.364</td>
+                            <td>0.626</td>
+                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-medium">0.597</td>
+                            <td class="volatility-high">0.698</td>
+                            <td class="volatility-high">0.643</td>
+                            <td class="volatility-medium">0.501</td>
+                            <td class="volatility-medium">0.566</td>
+                            <td class="bullish-signal">BULLISH</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>39</td>
+                            <td><strong>MYROUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.606</td>
+                            <td>0.764</td>
+                            <td>0.412</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.560</td>
+                            <td class="volatility-medium">0.301</td>
+                            <td class="volatility-high">0.887</td>
+                            <td class="volatility-high">0.635</td>
+                            <td class="volatility-high">0.723</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>40</td>
+                            <td><strong>LINEAUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.605</td>
+                            <td>0.639</td>
+                            <td>0.403</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.578</td>
+                            <td class="volatility-medium">0.537</td>
+                            <td class="volatility-medium">0.445</td>
+                            <td class="volatility-high">0.972</td>
+                            <td class="volatility-medium">0.523</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-medium">
+                            <td>41</td>
+                            <td><strong>APRUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.604</td>
+                            <td>0.562</td>
+                            <td>0.463</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-high">0.631</td>
+                            <td class="volatility-medium">0.598</td>
+                            <td class="volatility-high">0.720</td>
+                            <td class="volatility-high">0.668</td>
+                            <td class="volatility-medium">0.333</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>42</td>
+                            <td><strong>AVAAIUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.603</td>
+                            <td>0.713</td>
+                            <td>0.414</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.490</td>
+                            <td class="volatility-medium">0.532</td>
+                            <td class="volatility-medium">0.558</td>
+                            <td class="volatility-high">0.883</td>
+                            <td class="volatility-high">0.620</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-medium">
+                            <td>43</td>
+                            <td><strong>L3USDT</strong></td>
+                            <td class="score-cell volatility-high">0.603</td>
+                            <td>0.509</td>
+                            <td>0.465</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.523</td>
+                            <td class="volatility-high">0.627</td>
+                            <td class="volatility-low">0.263</td>
+                            <td class="volatility-high">0.888</td>
+                            <td class="volatility-high">0.810</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>44</td>
+                            <td><strong>SQDUSDT</strong></td>
+                            <td class="score-cell volatility-high">0.601</td>
+                            <td>0.749</td>
+                            <td>0.377</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.501</td>
+                            <td class="volatility-medium">0.547</td>
+                            <td class="volatility-medium">0.459</td>
+                            <td class="volatility-high">0.921</td>
+                            <td class="volatility-high">0.652</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
                         </tr>
             
                         <tr class="shorting-medium">
                             <td>45</td>
-                            <td><strong>COMMONUSDT</strong></td>
-                            <td class="volatility-medium">0.386</td>
-                            <td>0.558</td>
-                            <td>0.236</td>
+                            <td><strong>ALUUSDT</strong></td>
+                            <td class="score-cell volatility-medium">0.596</td>
+                            <td>0.545</td>
+                            <td>0.450</td>
                             <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td>13.23/2.5/0.77</td>
-                            <td>17.97/7.5/1.28</td>
-                            <td>28.24/45.0/2.88</td>
-                            <td>76.08/97.5/8.18</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-31.55% L:1.46%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>46</td>
-                            <td><strong>1000BTTUSDT</strong></td>
-                            <td class="volatility-medium">0.381</td>
-                            <td>0.341</td>
-                            <td>0.245</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>55.64/97.5/0.35</td>
-                            <td>71.02/65.0/0.52</td>
-                            <td>28.79/30.0/0.95</td>
-                            <td>92.2/62.5/1.69</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-8.76% L:1.78%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>47</td>
-                            <td><strong>MEMEUSDT</strong></td>
-                            <td class="volatility-medium">0.380</td>
-                            <td>0.308</td>
-                            <td>0.310</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>62.46/97.5/0.76</td>
-                            <td>55.28/45.0/1.18</td>
-                            <td>16.35/12.5/2.09</td>
-                            <td>35.29/32.5/4.26</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-11.62% L:6.13%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>48</td>
-                            <td><strong>SHIB1000USDT</strong></td>
-                            <td class="volatility-medium">0.364</td>
-                            <td>0.324</td>
-                            <td>0.263</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>37.58/97.5/0.6</td>
-                            <td>78.07/67.5/0.91</td>
-                            <td>5.06/0.0/1.56</td>
-                            <td>71.4/57.5/2.78</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-7.9% L:3.23%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>49</td>
-                            <td><strong>ENAUSDT</strong></td>
-                            <td class="volatility-medium">0.356</td>
-                            <td>0.399</td>
-                            <td>0.239</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>65.47/40.0/0.94</td>
-                            <td>36.75/12.5/1.34</td>
-                            <td>15.34/0.0/2.31</td>
-                            <td>50.95/87.5/4.75</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>low<br>(H:-14.54% L:2.99%)</td>
-                        </tr>
-            
-                        <tr class="">
-                            <td>50</td>
-                            <td><strong>NOTUSDT</strong></td>
-                            <td class="volatility-medium">0.308</td>
-                            <td>0.259</td>
-                            <td>0.278</td>
-                            <td><div class="opportunity-badges"></div></td>
-                            <td>37.72/22.5/0.97</td>
-                            <td>44.82/22.5/1.5</td>
-                            <td>30.57/20.0/2.57</td>
-                            <td>30.91/10.0/4.67</td>
+                            <td class="volatility-medium">0.480</td>
+                            <td class="volatility-medium">0.586</td>
+                            <td class="volatility-medium">0.466</td>
+                            <td class="volatility-high">0.874</td>
+                            <td class="volatility-high">0.643</td>
                             <td class="">NEUTRAL</td>
-                            <td>low<br>(H:-7.32% L:6.91%)</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>46</td>
+                            <td><strong>10000QUBICUSDT</strong></td>
+                            <td class="score-cell volatility-medium">0.593</td>
+                            <td>0.645</td>
+                            <td>0.408</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.451</td>
+                            <td class="volatility-medium">0.595</td>
+                            <td class="volatility-medium">0.487</td>
+                            <td class="volatility-high">0.724</td>
+                            <td class="volatility-high">0.808</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>47</td>
+                            <td><strong>VELODROMEUSDT</strong></td>
+                            <td class="score-cell volatility-medium">0.592</td>
+                            <td>0.680</td>
+                            <td>0.409</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.489</td>
+                            <td class="volatility-high">0.668</td>
+                            <td class="volatility-medium">0.319</td>
+                            <td class="volatility-high">0.877</td>
+                            <td class="volatility-high">0.673</td>
+                            <td class="">NEUTRAL</td>
+                            <td>MIDDLE</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>48</td>
+                            <td><strong>PTBUSDT</strong></td>
+                            <td class="score-cell volatility-medium">0.591</td>
+                            <td>0.755</td>
+                            <td>0.370</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.417</td>
+                            <td class="volatility-medium">0.421</td>
+                            <td class="volatility-high">0.797</td>
+                            <td class="volatility-high">0.856</td>
+                            <td class="volatility-medium">0.539</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-high">
+                            <td>49</td>
+                            <td><strong>AIOZUSDT</strong></td>
+                            <td class="score-cell volatility-medium">0.588</td>
+                            <td>0.657</td>
+                            <td>0.385</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
+                            <td class="volatility-medium">0.460</td>
+                            <td class="volatility-medium">0.559</td>
+                            <td class="volatility-medium">0.530</td>
+                            <td class="volatility-high">0.799</td>
+                            <td class="volatility-high">0.670</td>
+                            <td class="bearish-signal">BEARISH</td>
+                            <td>LOW</td>
+                        </tr>
+            
+                        <tr class="shorting-medium">
+                            <td>50</td>
+                            <td><strong>RESOLVUSDT</strong></td>
+                            <td class="score-cell volatility-medium">0.588</td>
+                            <td>0.549</td>
+                            <td>0.528</td>
+                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
+                            <td class="volatility-high">0.637</td>
+                            <td class="volatility-low">0.290</td>
+                            <td class="volatility-high">0.627</td>
+                            <td class="volatility-medium">0.505</td>
+                            <td class="volatility-high">0.992</td>
+                            <td class="">NEUTRAL</td>
+                            <td>LOW</td>
                         </tr>
             
                     </tbody>
@@ -885,7 +937,7 @@
                     <h2>⚡ Shorting Opportunities Guide</h2>
                     <p><strong>Ideal shorting candidates have:</strong></p>
                     <ul>
-                        <li>High Volatility Score (>0.6) - Large price movements expected</li>
+                        <li>High Combined Volatility Score (>0.6) - Large price movements expected</li>
                         <li>High Shorting Score (>0.5) - Combines volatility + bearish momentum</li>
                         <li>Bearish Trend - Price trending downward across timeframes</li>
                         <li>Low Price Position - Far from recent highs (better risk/reward)</li>
@@ -897,7 +949,7 @@
                     <h2>🚀 Longing Opportunities Guide</h2>
                     <p><strong>Ideal longing candidates have:</strong></p>
                     <ul>
-                        <li>High Volatility Score (>0.6) - Large price movements expected</li>
+                        <li>High Combined Volatility Score (>0.6) - Large price movements expected</li>
                         <li>High Longing Score (>0.5) - Combines volatility + bullish momentum</li>
                         <li>Bullish Trend - Price trending upward across timeframes</li>
                         <li>Good Price Position - Recovered from recent lows but not overextended</li>
@@ -906,17 +958,38 @@
                 </div>
                 
                 <div class="explanation-section">
-                    <h2>📖 Trading Scores & Indicators Guide</h2>
+                    <h2>📖 Volatility Scores Guide</h2>
                     
                     <div class="indicator-grid">
                         <div class="indicator-card">
-                            <h4>🎯 Volatility Score (0-1)</h4>
-                            <p><strong>Measures overall volatility potential across 5m, 15m, 1h, 4h:</strong></p>
+                            <h4>🎯 Combined Volatility Score (0-1)</h4>
+                            <p><strong>Weighted average across all timeframes:</strong></p>
                             <ul>
-                                <li><strong>RVI (25%):</strong> Volatility momentum</li>
-                                <li><strong>BBWP (25%):</strong> Bollinger Band expansion</li>
-                                <li><strong>ATR% (25%):</strong> Absolute volatility</li>
-                                <li><strong>Historical Vol (25%):</strong> Price movement volatility</li>
+                                <li><strong>5m (25%):</strong> Very short-term volatility</li>
+                                <li><strong>15m (22%):</strong> Short-term volatility</li>
+                                <li><strong>1h (20%):</strong> Medium-term volatility</li>
+                                <li><strong>4h (18%):</strong> Long-term volatility</li>
+                                <li><strong>1d (15%):</strong> Daily volatility context</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="indicator-card">
+                            <h4>⚡ Individual Timeframe Scores</h4>
+                            <p><strong>Each timeframe score combines:</strong></p>
+                            <ul>
+                                <li><strong>RVI (33%):</strong> Volatility momentum</li>
+                                <li><strong>BBWP (33%):</strong> Bollinger Band expansion</li>
+                                <li><strong>ATR% (33%):</strong> Absolute volatility</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="indicator-card">
+                            <h4>🎨 Color Coding</h4>
+                            <p><strong>Volatility score ranges:</strong></p>
+                            <ul>
+                                <li><span style="color: #e74c3c; font-weight: bold;">High (>0.6):</span> Excellent volatility for trading</li>
+                                <li><span style="color: #f39c12; font-weight: bold;">Medium (0.3-0.6):</span> Good volatility</li>
+                                <li><span style="color: #27ae60; font-weight: bold;">Low (<0.3):</span> Low volatility</li>
                             </ul>
                         </div>
                         
@@ -928,29 +1001,6 @@
                                 <li><strong>Bearish Momentum (40%):</strong> Downward price pressure</li>
                                 <li><strong>>0.6:</strong> Excellent shorting setup</li>
                                 <li><strong>0.5-0.6:</strong> Good shorting opportunity</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="indicator-card">
-                            <h4>🔺 Longing Score (0-1)</h4>
-                            <p><strong>Identifies best longing opportunities:</strong></p>
-                            <ul>
-                                <li><strong>Volatility Score (60%):</strong> High movement potential</li>
-                                <li><strong>Bullish Momentum (40%):</strong> Upward price pressure</li>
-                                <li><strong>>0.6:</strong> Excellent longing setup</li>
-                                <li><strong>0.5-0.6:</strong> Good longing opportunity</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="indicator-card">
-                            <h4>📈 Key Indicators</h4>
-                            <p><strong>How to read the signals:</strong></p>
-                            <ul>
-                                <li><strong>RVI >60:</strong> High volatility momentum</li>
-                                <li><strong>BBWP >80:</strong> Bands expanding (volatility increasing)</li>
-                                <li><strong>ATR% >3%:</strong> High absolute volatility</li>
-                                <li><strong>Trend:</strong> Overall price direction (4h timeframe)</li>
-                                <li><strong>Price Position:</strong> Relative to recent highs/lows</li>
                             </ul>
                         </div>
                     </div>
