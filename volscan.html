@@ -1,716 +1,348 @@
 
         <!DOCTYPE html>
-        <html lang="en">
+        <html>
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>🤖 Pro Kalman Scanner</title>
             <meta http-equiv="refresh" content="900">
-            <title>Bybit USDT Perpetual Volatility Scanner</title>
             <style>
-                body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
-                .container { max-width: 100%; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-                h1, h2, h3 { color: #333; }
-                h1 { text-align: center; margin-bottom: 10px; }
-                .last-updated { text-align: center; color: #666; margin-bottom: 20px; }
-                .refresh-info { 
-                    text-align: center; 
-                    color: #4CAF50; 
-                    font-style: italic; 
-                    margin-bottom: 20px;
-                    padding: 10px;
-                    background-color: #f0f8f0;
-                    border-radius: 5px;
-                }
-                table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 30px; font-size: 11px; }
-                th, td { padding: 6px; text-align: center; border: 1px solid #ddd; }
-                th { background-color: #4CAF50; color: white; position: sticky; top: 0; }
-                tr:nth-child(even) { background-color: #f2f2f2; }
-                tr:hover { background-color: #e9f7e9; }
-                .volatility-high { background-color: #ffebee; color: #e74c3c; font-weight: bold; }
-                .volatility-medium { background-color: #fff3e0; color: #f39c12; }
-                .volatility-low { background-color: #e8f5e8; color: #27ae60; }
-                .shorting-high { border-left: 4px solid #e74c3c; }
-                .shorting-medium { border-left: 4px solid #ff9800; }
-                .longing-high { border-left: 4px solid #27ae60; }
-                .longing-medium { border-left: 4px solid #7cb342; }
-                .bearish-signal { color: #e74c3c; font-weight: bold; }
-                .bullish-signal { color: #27ae60; font-weight: bold; }
-                .opportunity-badges { display: flex; justify-content: center; gap: 3px; }
-                .badge-short { background: #e74c3c; color: white; padding: 2px 4px; border-radius: 3px; font-size: 9px; }
-                .badge-long { background: #27ae60; color: white; padding: 2px 4px; border-radius: 3px; font-size: 9px; }
-                .score-cell { font-weight: bold; }
-                .explanation-section { 
-                    margin-top: 40px; 
-                    padding: 20px; 
-                    background-color: #f8f9fa; 
-                    border-radius: 10px;
-                    border-left: 5px solid #4CAF50;
-                }
-                .indicator-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    gap: 20px;
-                    margin-top: 20px;
-                }
-                .indicator-card {
-                    background: white;
-                    padding: 15px;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                }
-                .indicator-card h4 {
-                    color: #2c3e50;
-                    margin-top: 0;
-                    border-bottom: 2px solid #3498db;
-                    padding-bottom: 5px;
-                }
-                .shorting-guide {
-                    background: linear-gradient(135deg, #ffebee, #fce4ec);
-                    border-left: 5px solid #e74c3c;
-                }
-                .longing-guide {
-                    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
-                    border-left: 5px solid #27ae60;
-                }
-                .opportunity-summary {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 20px;
-                    margin-bottom: 20px;
-                }
-                .summary-card {
-                    padding: 15px;
-                    border-radius: 8px;
-                    text-align: center;
-                }
-                .summary-short { background: #ffebee; border: 2px solid #e74c3c; }
-                .summary-long { background: #e8f5e8; border: 2px solid #27ae60; }
+                body { font-family: monospace; background: #0d1117; color: #c9d1d9; padding: 20px; }
+                .container { max-width: 1400px; margin: 0 auto; }
+                table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #161b22; border-radius: 8px; overflow: hidden; }
+                th { background: #21262d; color: #58a6ff; padding: 15px; text-align: left; }
+                td { padding: 12px 15px; border-bottom: 1px solid #30363d; }
+                tr:hover { background: #21262d; }
+                
+                .bull { color: #3fb950; font-weight: bold; }
+                .bear { color: #f85149; font-weight: bold; }
+                .neutral { color: #8b949e; }
+                
+                .score-high { color: #3fb950; text-shadow: 0 0 10px rgba(63,185,80,0.3); }
+                .score-mid { color: #d29922; }
+                .score-low { color: #8b949e; }
+                
+                .tag { padding: 2px 8px; border-radius: 12px; font-size: 0.85em; }
+                .tag-prime { background: rgba(63,185,80,0.2); color: #3fb950; border: 1px solid #3fb950; }
+                .tag-chop { background: rgba(48,54,61,0.5); color: #8b949e; border: 1px solid #30363d; }
             </style>
         </head>
         <body>
             <div class="container">
-                <h1>📊 Bybit USDT Perpetual Volatility Scanner</h1>
-                <div class="last-updated">Last updated: 14:53 UTC+1</div>
-                <div class="refresh-info">
-                    🔄 <strong>Auto-refresh enabled</strong> - This page will automatically update every 15 minutes
+                <h1 style="text-align: center; color: #58a6ff;">🤖 Pro Kalman Scanner</h1>
+                <div style="text-align: center; margin-bottom: 30px; color: #8b949e;">
+                    Updated: 15:16 (UTC+1) | Scanned 30 Top Volume Pairs
                 </div>
                 
-                <!-- Opportunity Summary -->
-                <div class="opportunity-summary">
-                    <div class="summary-card summary-short">
-                        <h3>🔻 Shorting Opportunities</h3>
-                        <h2>13</h2>
-                        <p>Tokens with high shorting potential</p>
-                    </div>
-                    <div class="summary-card summary-long">
-                        <h3>🔺 Longing Opportunities</h3>
-                        <h2>25</h2>
-                        <p>Tokens with high longing potential</p>
-                    </div>
-                </div>
-                
-                <h2>🎯 Top Trading Opportunities (Sorted by Combined Volatility Score)</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Rank</th>
+                            <th>#</th>
                             <th>Symbol</th>
-                            <th>Combined Vol</th>
-                            <th>Short</th>
-                            <th>Long</th>
-                            <th>Opportunity</th>
-                            <th>5m Vol</th>
-                            <th>15m Vol</th>
-                            <th>1h Vol</th>
-                            <th>4h Vol</th>
-                            <th>1d Vol</th>
-                            <th>Trend</th>
-                            <th>Price Position</th>
+                            <th>Score</th>
+                            <th>5m ADX</th>
+                            <th>Trend Matrix (5m | 15m | 1h | 4h)</th>
+                            <th>Volatility</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
         
-                        <tr class="shorting-medium">
-                            <td>1</td>
-                            <td><strong>TACUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.889</td>
-                            <td>0.597</td>
-                            <td>0.854</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.884</td>
-                            <td class="volatility-high">0.907</td>
-                            <td class="volatility-high">0.867</td>
-                            <td class="volatility-high">0.927</td>
-                            <td class="volatility-high">0.856</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>6</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">TACUSDT</td>
+                    <td class="score-high" style="font-size:1.1em;">96</td>
+                    <td style="color:#3fb950;">76.4</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>6.35%</td>
+                    <td><span class="tag tag-prime">🔥 PRIME</span></td>
+                </tr>
             
-                        <tr class="shorting-medium">
-                            <td>2</td>
-                            <td><strong>BANANAS31USDT</strong></td>
-                            <td class="score-cell volatility-high">0.805</td>
-                            <td>0.542</td>
-                            <td>0.803</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.791</td>
-                            <td class="volatility-high">0.847</td>
-                            <td class="volatility-high">0.851</td>
-                            <td class="volatility-high">0.680</td>
-                            <td class="volatility-high">0.857</td>
-                            <td class="">NEUTRAL</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>5</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">BANANAS31USDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">77</td>
+                    <td style="color:#3fb950;">57.3</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>3.07%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-medium">
-                            <td>3</td>
-                            <td><strong>DODOUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.765</td>
-                            <td>0.565</td>
-                            <td>0.779</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.459</td>
-                            <td class="volatility-high">0.949</td>
-                            <td class="volatility-high">0.857</td>
-                            <td class="volatility-high">0.842</td>
-                            <td class="volatility-high">0.793</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>68</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">DODOUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">71</td>
+                    <td style="color:#3fb950;">51.0</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>4.25%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>4</td>
-                            <td><strong>HUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.752</td>
-                            <td>0.852</td>
-                            <td>0.531</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.809</td>
-                            <td class="volatility-high">0.945</td>
-                            <td class="volatility-high">0.859</td>
-                            <td class="volatility-high">0.621</td>
-                            <td class="volatility-medium">0.392</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>187</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">BATUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">69</td>
+                    <td style="color:#3fb950;">49.3</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.82%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>5</td>
-                            <td><strong>CROSSUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.706</td>
-                            <td>0.456</td>
-                            <td>0.744</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.662</td>
-                            <td class="volatility-medium">0.510</td>
-                            <td class="volatility-high">0.777</td>
-                            <td class="volatility-high">0.832</td>
-                            <td class="volatility-high">0.821</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>88</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">FWOGUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">68</td>
+                    <td style="color:#3fb950;">48.2</td>
+                    <td style="letter-spacing: 5px;">🔴 🔴 🔴 🔴 </td>
+                    <td>0.95%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>6</td>
-                            <td><strong>RESOLVUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.694</td>
-                            <td>0.817</td>
-                            <td>0.512</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.403</td>
-                            <td class="volatility-high">0.792</td>
-                            <td class="volatility-high">0.949</td>
-                            <td class="volatility-high">0.791</td>
-                            <td class="volatility-medium">0.580</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>59</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">CHILLGUYUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">68</td>
+                    <td style="color:#3fb950;">52.6</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🔴 </td>
+                    <td>0.62%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>7</td>
-                            <td><strong>USUALUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.689</td>
-                            <td>0.613</td>
-                            <td>0.581</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.484</td>
-                            <td class="volatility-high">0.625</td>
-                            <td class="volatility-high">0.835</td>
-                            <td class="volatility-high">0.823</td>
-                            <td class="volatility-high">0.767</td>
-                            <td class="">NEUTRAL</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>280</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">ATUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">66</td>
+                    <td style="color:#3fb950;">46.3</td>
+                    <td style="letter-spacing: 5px;">🔴 🔴 🔴 🔴 </td>
+                    <td>1.29%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>8</td>
-                            <td><strong>SAROSUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.681</td>
-                            <td>0.809</td>
-                            <td>0.409</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td class="volatility-medium">0.351</td>
-                            <td class="volatility-high">0.769</td>
-                            <td class="volatility-high">0.815</td>
-                            <td class="volatility-high">0.735</td>
-                            <td class="volatility-high">0.860</td>
-                            <td class="">NEUTRAL</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>41</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">COMMONUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">66</td>
+                    <td style="color:#3fb950;">45.9</td>
+                    <td style="letter-spacing: 5px;">🔴 🔴 🔴 🔴 </td>
+                    <td>0.88%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-medium">
-                            <td>9</td>
-                            <td><strong>MERLUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.674</td>
-                            <td>0.527</td>
-                            <td>0.604</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.531</td>
-                            <td class="volatility-high">0.618</td>
-                            <td class="volatility-high">0.751</td>
-                            <td class="volatility-high">0.851</td>
-                            <td class="volatility-high">0.678</td>
-                            <td class="">NEUTRAL</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>200</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">BICOUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">64</td>
+                    <td style="color:#3fb950;">43.5</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>1.29%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-medium">
-                            <td>10</td>
-                            <td><strong>XIONUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.673</td>
-                            <td>0.501</td>
-                            <td>0.724</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.405</td>
-                            <td class="volatility-medium">0.359</td>
-                            <td class="volatility-high">0.875</td>
-                            <td class="volatility-high">0.988</td>
-                            <td class="volatility-high">0.934</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>10</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">SHIB1000USDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">63</td>
+                    <td style="color:#3fb950;">42.8</td>
+                    <td style="letter-spacing: 5px;">🔴 🔴 🔴 🔴 </td>
+                    <td>0.29%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>11</td>
-                            <td><strong>ICNTUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.660</td>
-                            <td>0.396</td>
-                            <td>0.716</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.723</td>
-                            <td class="volatility-medium">0.432</td>
-                            <td class="volatility-medium">0.442</td>
-                            <td class="volatility-high">0.924</td>
-                            <td class="volatility-high">0.859</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>58</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">GIGAUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">63</td>
+                    <td style="color:#3fb950;">47.7</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🔴 </td>
+                    <td>0.64%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>12</td>
-                            <td><strong>ARCUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.651</td>
-                            <td>0.791</td>
-                            <td>0.471</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td class="volatility-medium">0.403</td>
-                            <td class="volatility-high">0.821</td>
-                            <td class="volatility-high">0.742</td>
-                            <td class="volatility-high">0.821</td>
-                            <td class="volatility-medium">0.489</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>159</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">QUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">62</td>
+                    <td style="color:#3fb950;">41.9</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.59%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>13</td>
-                            <td><strong>SOLVUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.641</td>
-                            <td>0.408</td>
-                            <td>0.704</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.637</td>
-                            <td class="volatility-high">0.718</td>
-                            <td class="volatility-high">0.659</td>
-                            <td class="volatility-high">0.636</td>
-                            <td class="volatility-medium">0.519</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>304</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">SNXUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">62</td>
+                    <td style="color:#3fb950;">41.6</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.70%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>14</td>
-                            <td><strong>AKEUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.634</td>
-                            <td>0.398</td>
-                            <td>0.652</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.703</td>
-                            <td class="volatility-high">0.670</td>
-                            <td class="volatility-medium">0.469</td>
-                            <td class="volatility-medium">0.526</td>
-                            <td class="volatility-high">0.814</td>
-                            <td class="">NEUTRAL</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>165</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">SOLVUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">61</td>
+                    <td style="color:#3fb950;">40.9</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>1.21%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>15</td>
-                            <td><strong>OMUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.633</td>
-                            <td>0.458</td>
-                            <td>0.700</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-low">0.266</td>
-                            <td class="volatility-medium">0.523</td>
-                            <td class="volatility-high">0.862</td>
-                            <td class="volatility-high">0.917</td>
-                            <td class="volatility-high">0.763</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>278</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">CUDISUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">60</td>
+                    <td style="color:#3fb950;">40.5</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.59%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>16</td>
-                            <td><strong>PUFFERUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.632</td>
-                            <td>0.383</td>
-                            <td>0.699</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.564</td>
-                            <td class="volatility-medium">0.460</td>
-                            <td class="volatility-high">0.697</td>
-                            <td class="volatility-high">0.731</td>
-                            <td class="volatility-high">0.792</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>109</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">TLMUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">60</td>
+                    <td style="color:#3fb950;">40.0</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.50%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>17</td>
-                            <td><strong>COMMONUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.629</td>
-                            <td>0.778</td>
-                            <td>0.391</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td class="volatility-medium">0.397</td>
-                            <td class="volatility-high">0.750</td>
-                            <td class="volatility-medium">0.521</td>
-                            <td class="volatility-high">0.886</td>
-                            <td class="volatility-high">0.675</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>293</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">DAMUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">60</td>
+                    <td style="color:#3fb950;">39.7</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>1.09%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>18</td>
-                            <td><strong>INUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.624</td>
-                            <td>0.380</td>
-                            <td>0.694</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.633</td>
-                            <td class="volatility-medium">0.499</td>
-                            <td class="volatility-high">0.767</td>
-                            <td class="volatility-medium">0.574</td>
-                            <td class="volatility-high">0.659</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>177</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">A2ZUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">57</td>
+                    <td style="color:#3fb950;">36.8</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.09%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>19</td>
-                            <td><strong>BICOUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.619</td>
-                            <td>0.433</td>
-                            <td>0.691</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.602</td>
-                            <td class="volatility-medium">0.386</td>
-                            <td class="volatility-high">0.758</td>
-                            <td class="volatility-high">0.715</td>
-                            <td class="volatility-high">0.684</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>50</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">MERLUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">55</td>
+                    <td style="color:#3fb950;">35.1</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>2.33%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>20</td>
-                            <td><strong>JTOUSDT</strong></td>
-                            <td class="score-cell volatility-high">0.613</td>
-                            <td>0.384</td>
-                            <td>0.662</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.545</td>
-                            <td class="volatility-medium">0.521</td>
-                            <td class="volatility-medium">0.566</td>
-                            <td class="volatility-high">0.700</td>
-                            <td class="volatility-high">0.819</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>182</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">TOWNSUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">39.1</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🔴 </td>
+                    <td>0.40%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>21</td>
-                            <td><strong>AINUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.598</td>
-                            <td>0.380</td>
-                            <td>0.679</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.334</td>
-                            <td class="volatility-medium">0.460</td>
-                            <td class="volatility-high">0.771</td>
-                            <td class="volatility-high">0.822</td>
-                            <td class="volatility-high">0.740</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>38</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">ENAUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">34.1</td>
+                    <td style="letter-spacing: 5px;">🔴 🔴 🔴 🔴 </td>
+                    <td>0.61%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>22</td>
-                            <td><strong>SDUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.590</td>
-                            <td>0.434</td>
-                            <td>0.632</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-low">0.237</td>
-                            <td class="volatility-medium">0.551</td>
-                            <td class="volatility-high">0.816</td>
-                            <td class="volatility-high">0.625</td>
-                            <td class="volatility-high">0.890</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>229</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">SAHARAUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">33.9</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.19%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>23</td>
-                            <td><strong>HOMEUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.590</td>
-                            <td>0.354</td>
-                            <td>0.613</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.522</td>
-                            <td class="volatility-high">0.661</td>
-                            <td class="volatility-medium">0.363</td>
-                            <td class="volatility-high">0.671</td>
-                            <td class="volatility-high">0.803</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>288</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">JSTUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">48.7</td>
+                    <td style="letter-spacing: 5px;">🟢 🔴 🔴 🟢 </td>
+                    <td>0.10%</td>
+                    <td></td>
+                </tr>
             
-                        <tr class="shorting-high">
-                            <td>24</td>
-                            <td><strong>ATUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.589</td>
-                            <td>0.753</td>
-                            <td>0.353</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td class="volatility-medium">0.499</td>
-                            <td class="volatility-medium">0.343</td>
-                            <td class="volatility-high">0.656</td>
-                            <td class="volatility-high">0.982</td>
-                            <td class="volatility-medium">0.538</td>
-                            <td class="bearish-signal">BEARISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>37</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">STRKUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">33.6</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.70%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-medium">
-                            <td>25</td>
-                            <td><strong>SPXUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.587</td>
-                            <td>0.370</td>
-                            <td>0.591</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.638</td>
-                            <td class="volatility-medium">0.525</td>
-                            <td class="volatility-medium">0.345</td>
-                            <td class="volatility-high">0.878</td>
-                            <td class="volatility-medium">0.565</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>210</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">BROCCOLIUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">33.5</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.60%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-medium">
-                            <td>26</td>
-                            <td><strong>PENDLEUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.587</td>
-                            <td>0.352</td>
-                            <td>0.594</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.611</td>
-                            <td class="volatility-medium">0.555</td>
-                            <td class="volatility-medium">0.565</td>
-                            <td class="volatility-medium">0.593</td>
-                            <td class="volatility-high">0.613</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>173</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">AVAAIUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">54</td>
+                    <td style="color:#3fb950;">33.5</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.57%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>27</td>
-                            <td><strong>PLUMEUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.574</td>
-                            <td>0.424</td>
-                            <td>0.664</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.354</td>
-                            <td class="volatility-medium">0.390</td>
-                            <td class="volatility-high">0.748</td>
-                            <td class="volatility-high">0.690</td>
-                            <td class="volatility-high">0.835</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>1</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">1000PEPEUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">53</td>
+                    <td style="color:#3fb950;">33.1</td>
+                    <td style="letter-spacing: 5px;">🔴 🔴 🔴 🔴 </td>
+                    <td>0.34%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-medium">
-                            <td>28</td>
-                            <td><strong>HOOKUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.563</td>
-                            <td>0.357</td>
-                            <td>0.589</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-high">0.618</td>
-                            <td class="volatility-medium">0.524</td>
-                            <td class="volatility-medium">0.545</td>
-                            <td class="volatility-medium">0.368</td>
-                            <td class="volatility-high">0.785</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>MIDDLE</td>
-                        </tr>
+                <tr>
+                    <td>214</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">FLRUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">53</td>
+                    <td style="color:#3fb950;">42.6</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🔴 🔴 </td>
+                    <td>0.19%</td>
+                    <td></td>
+                </tr>
             
-                        <tr class="shorting-medium">
-                            <td>29</td>
-                            <td><strong>FARTCOINUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.559</td>
-                            <td>0.529</td>
-                            <td>0.467</td>
-                            <td><div class="opportunity-badges"><span class="badge-short">SHORT</span></div></td>
-                            <td class="volatility-medium">0.465</td>
-                            <td class="volatility-medium">0.596</td>
-                            <td class="volatility-medium">0.481</td>
-                            <td class="volatility-high">0.666</td>
-                            <td class="volatility-high">0.635</td>
-                            <td class="">NEUTRAL</td>
-                            <td>LOW</td>
-                        </tr>
+                <tr>
+                    <td>178</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">C98USDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">52</td>
+                    <td style="color:#3fb950;">32.5</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>0.46%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
             
-                        <tr class="longing-high">
-                            <td>30</td>
-                            <td><strong>NAORISUSDT</strong></td>
-                            <td class="score-cell volatility-medium">0.558</td>
-                            <td>0.391</td>
-                            <td>0.633</td>
-                            <td><div class="opportunity-badges"><span class="badge-long">LONG</span></div></td>
-                            <td class="volatility-medium">0.372</td>
-                            <td class="volatility-medium">0.438</td>
-                            <td class="volatility-high">0.650</td>
-                            <td class="volatility-high">0.931</td>
-                            <td class="volatility-medium">0.476</td>
-                            <td class="bullish-signal">BULLISH</td>
-                            <td>LOW</td>
-                        </tr>
-            
-                    </tbody>
-                </table>
-                
-                <div class="explanation-section shorting-guide">
-                    <h2>⚡ Shorting Opportunities Guide</h2>
-                    <p><strong>Ideal shorting candidates have:</strong></p>
-                    <ul>
-                        <li>High Combined Volatility Score (>0.6) - Large price movements expected</li>
-                        <li>High Shorting Score (>0.5) - Combines volatility + bearish momentum</li>
-                        <li>Bearish Trend - Price trending downward across timeframes</li>
-                        <li>Low Price Position - Far from recent highs (better risk/reward)</li>
-                        <li>Negative price momentum on multiple timeframes</li>
-                    </ul>
-                </div>
-                
-                <div class="explanation-section longing-guide">
-                    <h2>🚀 Longing Opportunities Guide</h2>
-                    <p><strong>Ideal longing candidates have:</strong></p>
-                    <ul>
-                        <li>High Combined Volatility Score (>0.6) - Large price movements expected</li>
-                        <li>High Longing Score (>0.5) - Combines volatility + bullish momentum</li>
-                        <li>Bullish Trend - Price trending upward across timeframes</li>
-                        <li>Good Price Position - Recovered from recent lows but not overextended</li>
-                        <li>Positive price momentum on multiple timeframes</li>
-                    </ul>
-                </div>
-                
-                <div class="explanation-section">
-                    <h2>📖 Volatility Scores Guide</h2>
-                    
-                    <div class="indicator-grid">
-                        <div class="indicator-card">
-                            <h4>🎯 Combined Volatility Score (0-1)</h4>
-                            <p><strong>Weighted average across all timeframes:</strong></p>
-                            <ul>
-                                <li><strong>5m (25%):</strong> Very short-term volatility</li>
-                                <li><strong>15m (22%):</strong> Short-term volatility</li>
-                                <li><strong>1h (20%):</strong> Medium-term volatility</li>
-                                <li><strong>4h (18%):</strong> Long-term volatility</li>
-                                <li><strong>1d (15%):</strong> Daily volatility context</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="indicator-card">
-                            <h4>⚡ Individual Timeframe Scores</h4>
-                            <p><strong>Each timeframe score combines:</strong></p>
-                            <ul>
-                                <li><strong>RVI (33%):</strong> Volatility momentum</li>
-                                <li><strong>BBWP (33%):</strong> Bollinger Band expansion</li>
-                                <li><strong>ATR% (33%):</strong> Absolute volatility</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="indicator-card">
-                            <h4>🎨 Color Coding</h4>
-                            <p><strong>Volatility score ranges:</strong></p>
-                            <ul>
-                                <li><span style="color: #e74c3c; font-weight: bold;">High (>0.6):</span> Excellent volatility for trading</li>
-                                <li><span style="color: #f39c12; font-weight: bold;">Medium (0.3-0.6):</span> Good volatility</li>
-                                <li><span style="color: #27ae60; font-weight: bold;">Low (<0.3):</span> Low volatility</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="indicator-card">
-                            <h4>🔻 Shorting Score (0-1)</h4>
-                            <p><strong>Identifies best shorting opportunities:</strong></p>
-                            <ul>
-                                <li><strong>Volatility Score (60%):</strong> High movement potential</li>
-                                <li><strong>Bearish Momentum (40%):</strong> Downward price pressure</li>
-                                <li><strong>>0.6:</strong> Excellent shorting setup</li>
-                                <li><strong>0.5-0.6:</strong> Good shorting opportunity</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <script>
-                // Auto-refresh countdown timer (15 minutes)
-                let timeLeft = 900;
-                const timerElement = document.createElement('div');
-                timerElement.style.textAlign = 'center';
-                timerElement.style.marginTop = '20px';
-                timerElement.style.color = '#666';
-                timerElement.style.fontSize = '14px';
-                document.querySelector('.container').appendChild(timerElement);
-                
-                function updateTimer() {
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    timerElement.textContent = `🕒 Next auto-refresh in: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    timeLeft--;
-                    
-                    if (timeLeft < 0) {
-                        timeLeft = 900;
-                    }
-                }
-                
-                setInterval(updateTimer, 1000);
-                updateTimer();
-            </script>
-        </body>
-        </html>
-        
+                <tr>
+                    <td>175</td>
+                    <td style="font-weight:bold; color: #e0e0e0;">UAIUSDT</td>
+                    <td class="score-mid" style="font-size:1.1em;">52</td>
+                    <td style="color:#3fb950;">32.0</td>
+                    <td style="letter-spacing: 5px;">🟢 🟢 🟢 🟢 </td>
+                    <td>1.10%</td>
+                    <td><span class="tag" style="border:1px solid #58a6ff; color:#58a6ff">🌊 TRENDING</span></td>
+                </tr>
+            </tbody></table></div></body></html>
